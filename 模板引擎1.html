@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            display: flex;
+            justify-content: space-between;
+            width: 1000px;
+        }
+    </style>
+    <script src="./jquery.min.js"></script>
+    <script src="./template-web.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+    </div>
+
+    <script type="text/html" id="putData">
+        {{each data}}
+        <div class="item">
+            <div class="left">
+                <p class="job">{{$value.job}}</p>
+                <p class="request">
+                    <span class="salary">{{$value.salary}}</span>
+                    <span class="req">{{each $value.req}} {{$value}}{{/each}}</span>
+                </p>
+            </div>
+            <div class="right">
+                <p class="cname">{{$value.cname}}</p>
+                <p class="introduce"><span>{{each $value.introduce}}{{$value}}{{/each}}</span></p>
+            </div>
+        </div>
+
+        {{/each}}
+    </script>
+    <script>
+        const getdata = {
+            status: '0',
+            message: '获取数据成功',
+            data: [{
+                job: 'WEB前端开发',
+                salary: '8-13k',
+                req: ['1-3年', '本科'],
+                cname: '携宁科技',
+                introduce: ['计算机科技', '未融资']
+            }, {
+                job: 'HTML5',
+                salary: '5-10k',
+                req: ['1-3年', '本科'],
+                cname: '易星云',
+                introduce: ['计算机科技', '不需要融资', '20-99人']
+            }, {
+                job: '应用开发',
+                salary: '8-14薪',
+                req: ['经验不限', '大专'],
+                cname: '携宁科技',
+                introduce: ['计算机科技', '未融资']
+            }]
+        }
+
+        const htmlstr = template('putData', getdata)
+        $('.container').html(htmlstr)
+    </script>
+</body>
+
+</html>

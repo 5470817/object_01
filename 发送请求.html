@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://192.168.13.158:3001/api/addsong')
+        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
+        xhr.send('song=孤勇者&singer=陈奕迅')
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+            }
+        }
+
+        // xhr.open('GET', 'http://192.168.13.158:3001/api/getsongs')
+        // xhr.send()
+        // xhr.onreadystatechange = () => {
+        //     if (xhr.readyState === 4 && xhr.status === 200) {
+        //         console.log(xhr.responseText);
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

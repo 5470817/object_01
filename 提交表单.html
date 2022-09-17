@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input {
+            outline: none;
+        }
+    </style>
+    <script src="./jquery.min.js"></script>
+</head>
+
+<body>
+    <form id="addSong">
+        <input type="text" name="song"><br>
+        <input type="text" name="singer"><br>
+        <input type="text" name="album"><br>
+        <input type="submit">
+    </form>
+    <script>
+        $('[type=submit]').on('submit', function(e) {
+            e.preventDefault()
+            $.ajax({
+                method: 'POST',
+                url: 'http://192.168.13.158:3001/api/addsong',
+                data: $('#addSong').serialize(),
+                success: res => console.log(res)
+            })
+        })
+    </script>
+</body>
+
+</html>

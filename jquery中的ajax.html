@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        $(function() {
+            //获取带条件的GET
+            // $.ajax({
+            //     method: 'GET',
+            //     url: 'http://192.168.13.158:3001/api/getsong',
+            //     data: {
+            //         id: 1
+            //     },
+            //     success: res => {
+            //         console.log(res);
+            //     }
+            // })
+
+            //获取所有的歌曲
+            // $.ajax({
+            //     method: 'GET',
+            //     url: 'http://192.168.13.158:3001/api/getsongs',
+            //     success: res => {
+            //         console.log(res);
+            //     }
+            // })
+
+            // 删除歌曲
+            $.ajax({
+                method: 'POST',
+                url: 'http://192.168.13.158:3001/api/deletesong',
+                data: {
+                    id: 35
+                },
+                success: res => console.log(res)
+            })
+        })
+    </script>
+</body>
+
+</html>
