@@ -19,12 +19,17 @@
             margin: 100px auto;
         }
         
+        .search header {
+            display: flex;
+        }
+        
         input {
             width: 400px;
             height: 30px;
             box-sizing: border-box;
             border: 2px solid orangered;
             outline: none;
+            text-indent: 10px;
         }
         
         button {
@@ -32,6 +37,7 @@
             height: 30px;
             outline: none;
             border: 2px solid orangered;
+            flex: 1;
         }
         
         ul {
@@ -49,11 +55,51 @@
     <div class="search">
         <header>
             <input type="text"><button>搜索</button>
-            <ul>
-                <li>111</li>
-            </ul>
         </header>
+        <div class="content">
+            <ul></ul>
+        </div>
     </div>
+
+    <!-- 定义模板结构 -->
+    <script type="text/html" id="putLi">
+        {{each result}}
+        <li>{{$value[0]}}</li> {{/each}}
+    </script>
+
+    <script>
+        // 设置定时器变量
+        let timer = null
+
+        // 键盘弹起时调用函数，搜索相关内容
+        $('input').on('keyup', function() {
+            getData()
+        })
+
+        // 封装函数，发起Ajax请求搜索内容。防抖
+        function getData() {
+            // 清除定时器
+            clearTimeout(timer)
+
+            // 设置定时器
+            timer = setTimeout(() => {
+                $.ajax({
+                    method: 'GET',
+                    dataType: 'jsonp',
+                    url: 'http://suggest.taobao.com/sug?q=' + $('input').val(),
+                    success: (res) => {
+                        putLis(res)
+                    }
+                })
+            }, 500)
+        }
+
+        // 调用template函数，将结果渲染到ul
+        function putLis(data) {
+            const htmlstr = template('putLi', data)
+            $('ul').html(htmlstr)
+        }
+    </script>
 </body>
 
 </html>
